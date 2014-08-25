@@ -16,8 +16,39 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <h1>Let's time this shit</h1>
+  <body ng-app="scrumtimer">
+    <div class="container" ng-controller="timerCtrl">
+        <h1>{{currentTime}}</h1>
+        <h2>{{totalTime}}</h2>
+        <button
+            ng-if="!running"
+            ng-click="start()"
+            type="button"
+            class="btn btn-success">
+            Start
+        </button>
+        <button
+            ng-if="running"
+            ng-click="stop()"
+            type="button"
+            class="btn btn-danger">
+            Stop
+        </button>
+        <button
+            ng-if="running"
+            ng-click="lap()"
+            type="button"
+            class="btn btn-warning">
+            Lap
+        </button>
+        <button
+            ng-if="!running"
+            ng-click="reset()"
+            type="button"
+            class="btn btn-danger">
+            Reset
+        </button>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
@@ -28,5 +59,8 @@
     <script src="/vendor/angular/angular.min.js"></script>
     <script src="/vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- Local Scripts -->
+    <script src="/scripts/app.js"></script>
   </body>
 </html>
