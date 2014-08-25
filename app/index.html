@@ -20,10 +20,10 @@
     <div class="container" ng-controller="timerCtrl">
         <div class="row">
             <div class="col-xs-6">
-                <h2>{{ currentTime|time }}</h2>
+                <h3>{{ currentTime|time }}</h3>
             </div>
             <div class="col-xs-6">
-                <h2 ng-if="laps.length>0">Total: {{ totalTime|time }}</h2>
+                <h3 ng-if="laps.length>0">Total: {{ totalTime|time }}</h3>
             </div>
         </div>
         <div class="row">
