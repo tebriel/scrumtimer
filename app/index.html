@@ -18,43 +18,60 @@
   </head>
   <body ng-app="scrumtimer">
     <div class="container" ng-controller="timerCtrl">
-        <h1>{{ currentTime|time }}</h1>
-        <h2>{{ totalTime|time }}</h2>
-        <button
-            ng-if="!running"
-            ng-click="start()"
-            type="button"
-            class="btn btn-success btn-lg">
-            Start
-        </button>
-        <button
-            ng-if="running"
-            ng-click="stop()"
-            type="button"
-            class="btn btn-danger btn-lg">
-            Stop
-        </button>
-        <button
-            ng-if="running"
-            ng-click="lap()"
-            type="button"
-            class="btn btn-warning btn-lg">
-            Lap
-        </button>
-        <button
-            ng-if="!running"
-            ng-click="reset()"
-            type="button"
-            class="btn btn-danger btn-lg">
-            Reset
-        </button>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>{{ currentTime|time }}</h2>
+            </div>
+            <div class="col-xs-6">
+                <h2 ng-if="laps.length>0">Total: {{ totalTime|time }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <button
+                ng-if="!running"
+                ng-click="start()"
+                type="button"
+                class="btn btn-success col-xs-6">
+                Start
+            </button>
+            <button
+                ng-if="running"
+                ng-click="stop()"
+                type="button"
+                class="btn btn-danger col-xs-6">
+                Stop
+            </button>
+            <button
+                ng-if="running"
+                ng-click="lap()"
+                type="button"
+                class="btn btn-warning col-xs-6">
+                Lap
+            </button>
+            <button
+                ng-if="!running"
+                ng-click="reset()"
+                type="button"
+                class="btn btn-danger col-xs-6">
+                Reset
+            </button>
+        </div>
 
-        <h3 ng-if="laps.length>0">{{ (totalTime / (laps.length+1))|time }}</h3>
+        <h3 ng-if="laps.length>0">Average: {{ average()|time }} </h3>
+        <h3 ng-if="laps.length>1">Longest: {{ longest().time|time }}</h3>
+        <h3 ng-if="laps.length>1">Shortest: {{ shortest().time|time }}</h3>
 
         <ul class='list-group'>
             <li class="list-group-item"
-                ng-repeat="lap in laps">
-                {{ lap.time|time }}
+                ng-repeat="lapItem in laps">
+                {{ lapItem.time|time }}
+                <button
+                    ng-if="!$first"
+                    ng-click="merge($index)"
+                    type="button"
+                    class="btn btn-info btn-sm">
+                    Merge With Above
+                </button>
             </li>
         </ul>
     </div>

@@ -14,6 +14,29 @@ class TimerCtrl
         @$scope.stop = @stop
         @$scope.lap = @lap
         @$scope.reset = @reset
+        @$scope.merge = @merge
+        @$scope.longest = @longest
+        @$scope.shortest = @shortest
+        @$scope.average = @average
+
+        return
+
+    merge: (index) =>
+        previous = @$scope.laps[index - 1]
+        current = @$scope.laps[index]
+        previous.time += current.time
+        @$scope.laps = _.without @$scope.laps, current
+
+        return
+
+    average: =>
+        return @$scope.totalTime / (@$scope.laps.length+1)
+
+    longest: =>
+        return _.max @$scope.laps, (lap) -> lap.time
+
+    shortest: =>
+        return _.min @$scope.laps, (lap) -> lap.time
 
     start: =>
         @timerInterval = @$interval @addTime, TIME_INTERVAL
@@ -57,5 +80,5 @@ app.controller 'timerCtrl', [
 
 app.filter 'time', ->
         return (ms) ->
-            return Math.floor(ms/1000)
+            return "#{Math.floor(ms/1000)} s"
 

@@ -17,6 +17,10 @@
       this.reset = __bind(this.reset, this);
       this.lap = __bind(this.lap, this);
       this.start = __bind(this.start, this);
+      this.shortest = __bind(this.shortest, this);
+      this.longest = __bind(this.longest, this);
+      this.average = __bind(this.average, this);
+      this.merge = __bind(this.merge, this);
       this.reset();
       this.bindScope();
       return;
@@ -26,7 +30,35 @@
       this.$scope.start = this.start;
       this.$scope.stop = this.stop;
       this.$scope.lap = this.lap;
-      return this.$scope.reset = this.reset;
+      this.$scope.reset = this.reset;
+      this.$scope.merge = this.merge;
+      this.$scope.longest = this.longest;
+      this.$scope.shortest = this.shortest;
+      this.$scope.average = this.average;
+    };
+
+    TimerCtrl.prototype.merge = function(index) {
+      var current, previous;
+      previous = this.$scope.laps[index - 1];
+      current = this.$scope.laps[index];
+      previous.time += current.time;
+      this.$scope.laps = _.without(this.$scope.laps, current);
+    };
+
+    TimerCtrl.prototype.average = function() {
+      return this.$scope.totalTime / (this.$scope.laps.length + 1);
+    };
+
+    TimerCtrl.prototype.longest = function() {
+      return _.max(this.$scope.laps, function(lap) {
+        return lap.time;
+      });
+    };
+
+    TimerCtrl.prototype.shortest = function() {
+      return _.min(this.$scope.laps, function(lap) {
+        return lap.time;
+      });
     };
 
     TimerCtrl.prototype.start = function() {
@@ -67,7 +99,7 @@
 
   app.filter('time', function() {
     return function(ms) {
-      return Math.floor(ms / 1000);
+      return "" + (Math.floor(ms / 1000)) + " s";
     };
   });
 
