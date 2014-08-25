@@ -18,6 +18,8 @@ class TimerCtrl
         @$scope.longest = @longest
         @$scope.shortest = @shortest
         @$scope.average = @average
+        @$scope.isLongest = @isLongest
+        @$scope.isShortest = @isShortest
 
         return
 
@@ -28,6 +30,12 @@ class TimerCtrl
         @$scope.laps = _.without @$scope.laps, current
 
         return
+
+    isLongest: (lapItem) =>
+        Math.floor(lapItem.time/1000) is Math.floor(@longest().time/1000)
+
+    isShortest: (lapItem) =>
+        Math.floor(lapItem.time/1000) is Math.floor(@shortest().time/1000)
 
     average: =>
         return @$scope.totalTime / (@$scope.laps.length+1)

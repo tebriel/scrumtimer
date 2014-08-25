@@ -20,6 +20,8 @@
       this.shortest = __bind(this.shortest, this);
       this.longest = __bind(this.longest, this);
       this.average = __bind(this.average, this);
+      this.isShortest = __bind(this.isShortest, this);
+      this.isLongest = __bind(this.isLongest, this);
       this.merge = __bind(this.merge, this);
       this.reset();
       this.bindScope();
@@ -35,6 +37,8 @@
       this.$scope.longest = this.longest;
       this.$scope.shortest = this.shortest;
       this.$scope.average = this.average;
+      this.$scope.isLongest = this.isLongest;
+      this.$scope.isShortest = this.isShortest;
     };
 
     TimerCtrl.prototype.merge = function(index) {
@@ -43,6 +47,14 @@
       current = this.$scope.laps[index];
       previous.time += current.time;
       this.$scope.laps = _.without(this.$scope.laps, current);
+    };
+
+    TimerCtrl.prototype.isLongest = function(lapItem) {
+      return Math.floor(lapItem.time / 1000) === Math.floor(this.longest().time / 1000);
+    };
+
+    TimerCtrl.prototype.isShortest = function(lapItem) {
+      return Math.floor(lapItem.time / 1000) === Math.floor(this.shortest().time / 1000);
     };
 
     TimerCtrl.prototype.average = function() {

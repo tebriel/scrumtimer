@@ -63,6 +63,8 @@
 
         <ul class='list-group'>
             <li class="list-group-item"
+                ng-class="{'list-group-item-danger':isLongest(lapItem),
+                            'list-group-item-success':isShortest(lapItem)}"
                 ng-repeat="lapItem in laps">
                 {{ lapItem.time|time }}
                 <button
