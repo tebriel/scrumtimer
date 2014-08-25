@@ -18,36 +18,45 @@
   </head>
   <body ng-app="scrumtimer">
     <div class="container" ng-controller="timerCtrl">
-        <h1>{{currentTime}}</h1>
-        <h2>{{totalTime}}</h2>
+        <h1>{{ currentTime|time }}</h1>
+        <h2>{{ totalTime|time }}</h2>
         <button
             ng-if="!running"
             ng-click="start()"
             type="button"
-            class="btn btn-success">
+            class="btn btn-success btn-lg">
             Start
         </button>
         <button
             ng-if="running"
             ng-click="stop()"
             type="button"
-            class="btn btn-danger">
+            class="btn btn-danger btn-lg">
             Stop
         </button>
         <button
             ng-if="running"
             ng-click="lap()"
             type="button"
-            class="btn btn-warning">
+            class="btn btn-warning btn-lg">
             Lap
         </button>
         <button
             ng-if="!running"
             ng-click="reset()"
             type="button"
-            class="btn btn-danger">
+            class="btn btn-danger btn-lg">
             Reset
         </button>
+
+        <h3 ng-if="laps.length>0">{{ (totalTime / (laps.length+1))|time }}</h3>
+
+        <ul class='list-group'>
+            <li class="list-group-item"
+                ng-repeat="lap in laps">
+                {{ lap.time|time }}
+            </li>
+        </ul>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

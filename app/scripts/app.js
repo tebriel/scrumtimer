@@ -35,6 +35,9 @@
     };
 
     TimerCtrl.prototype.lap = function() {
+      this.$scope.laps.unshift({
+        time: this.$scope.currentTime
+      });
       this.$scope.currentTime = 0;
     };
 
@@ -42,6 +45,7 @@
       this.$scope.currentTime = 0;
       this.$scope.totalTime = 0;
       this.$scope.running = false;
+      this.$scope.laps = [];
     };
 
     TimerCtrl.prototype.stop = function() {
@@ -60,5 +64,11 @@
   })();
 
   app.controller('timerCtrl', ['$scope', '$interval', TimerCtrl]);
+
+  app.filter('time', function() {
+    return function(ms) {
+      return Math.floor(ms / 1000);
+    };
+  });
 
 }).call(this);

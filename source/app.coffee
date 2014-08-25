@@ -22,6 +22,7 @@ class TimerCtrl
         return
 
     lap: =>
+        @$scope.laps.unshift { time: @$scope.currentTime }
         @$scope.currentTime = 0
 
         return
@@ -30,6 +31,7 @@ class TimerCtrl
         @$scope.currentTime = 0
         @$scope.totalTime = 0
         @$scope.running = false
+        @$scope.laps = []
 
         return
 
@@ -52,3 +54,8 @@ app.controller 'timerCtrl', [
     '$interval'
     TimerCtrl
 ]
+
+app.filter 'time', ->
+        return (ms) ->
+            return Math.floor(ms/1000)
+
