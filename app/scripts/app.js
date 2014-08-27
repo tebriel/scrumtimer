@@ -111,7 +111,14 @@
 
   app.filter('time', function() {
     return function(ms) {
-      return "" + (Math.floor(ms / 1000)) + " s";
+      var minutes, seconds;
+      seconds = Math.floor(ms / 1000);
+      minutes = Math.floor(seconds / 60);
+      seconds = seconds % 60;
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      return "" + minutes + ":" + seconds;
     };
   });
 

@@ -88,5 +88,9 @@ app.controller 'timerCtrl', [
 
 app.filter 'time', ->
         return (ms) ->
-            return "#{Math.floor(ms/1000)} s"
+            seconds = Math.floor(ms/1000)
+            minutes = Math.floor(seconds / 60)
+            seconds = seconds % 60
+            seconds = "0#{seconds}" if seconds < 10
+            return "#{minutes}:#{seconds}"
 

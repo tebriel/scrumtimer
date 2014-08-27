@@ -31,29 +31,30 @@
                 ng-if="!running"
                 ng-click="start()"
                 type="button"
-                class="btn btn-success col-xs-6">
+                class="btn btn-success col-xs-5">
                 Start
             </button>
             <button
                 ng-if="running"
                 ng-click="stop()"
                 type="button"
-                class="btn btn-danger col-xs-6">
+                class="btn btn-danger col-xs-5">
                 Stop
+            </button>
+            <div class="col-xs-2"></div>
+            <button
+                ng-if="!running"
+                ng-click="reset()"
+                type="button"
+                class="btn btn-danger col-xs-5">
+                Reset
             </button>
             <button
                 ng-if="running"
                 ng-click="lap()"
                 type="button"
-                class="btn btn-warning col-xs-6">
+                class="btn btn-warning col-xs-5">
                 Lap
-            </button>
-            <button
-                ng-if="!running"
-                ng-click="reset()"
-                type="button"
-                class="btn btn-danger col-xs-6">
-                Reset
             </button>
         </div>
 
