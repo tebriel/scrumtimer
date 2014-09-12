@@ -47,6 +47,8 @@ class TimerCtrl
         return _.min @$scope.laps, (lap) -> lap.time
 
     start: =>
+        @startTime = new Date
+        @currentStart = new Date
         @timerInterval = @$interval @addTime, TIME_INTERVAL
         @$scope.running = true
 
@@ -55,6 +57,7 @@ class TimerCtrl
     lap: =>
         @$scope.laps.unshift { time: @$scope.currentTime }
         @$scope.currentTime = 0
+        @currentStart = new Date
 
         return
 
@@ -74,8 +77,8 @@ class TimerCtrl
         return
 
     addTime: =>
-        @$scope.currentTime += TIME_INTERVAL
-        @$scope.totalTime += TIME_INTERVAL
+        @$scope.currentTime = (new Date) - @currentStart
+        @$scope.totalTime = (new Date) - @startTime
 
         return
 

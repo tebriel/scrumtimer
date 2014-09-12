@@ -74,6 +74,8 @@
     };
 
     TimerCtrl.prototype.start = function() {
+      this.startTime = new Date;
+      this.currentStart = new Date;
       this.timerInterval = this.$interval(this.addTime, TIME_INTERVAL);
       this.$scope.running = true;
     };
@@ -83,6 +85,7 @@
         time: this.$scope.currentTime
       });
       this.$scope.currentTime = 0;
+      this.currentStart = new Date;
     };
 
     TimerCtrl.prototype.reset = function() {
@@ -99,8 +102,8 @@
     };
 
     TimerCtrl.prototype.addTime = function() {
-      this.$scope.currentTime += TIME_INTERVAL;
-      this.$scope.totalTime += TIME_INTERVAL;
+      this.$scope.currentTime = (new Date) - this.currentStart;
+      this.$scope.totalTime = (new Date) - this.startTime;
     };
 
     return TimerCtrl;
