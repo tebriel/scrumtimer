@@ -27,18 +27,19 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-xs-1"></div>
             <button
                 ng-if="!running"
                 ng-click="start()"
                 type="button"
-                class="btn btn-success col-xs-5">
+                class="btn btn-lg btn-success col-xs-5">
                 Start
             </button>
             <button
                 ng-if="running"
                 ng-click="stop()"
                 type="button"
-                class="btn btn-danger col-xs-5">
+                class="btn btn-lg btn-danger col-xs-5">
                 Stop
             </button>
             <div class="col-xs-2"></div>
@@ -46,21 +47,24 @@
                 ng-if="!running"
                 ng-click="reset()"
                 type="button"
-                class="btn btn-danger col-xs-5">
+                class="btn btn-lg btn-danger col-xs-5">
                 Reset
             </button>
             <button
                 ng-if="running"
                 ng-click="lap()"
                 type="button"
-                class="btn btn-warning col-xs-5">
+                class="btn btn-lg btn-warning col-xs-5">
                 Lap
             </button>
         </div>
 
-        <h3 ng-if="laps.length>0">Average: {{ average()|time }} </h3>
-        <h3 ng-if="laps.length>1">Longest: {{ longest().time|time }}</h3>
-        <h3 ng-if="laps.length>1">Shortest: {{ shortest().time|time }}</h3>
+        <br />
+        <div ng-if="laps.length>1&&!running">
+            <h3>Average: {{ average()|time }} </h3>
+            <h3>Longest: {{ longest().time|time }}</h3>
+            <h3>Shortest: {{ shortest().time|time }}</h3>
+        </div>
 
         <ul class='list-group'>
             <li class="list-group-item"
