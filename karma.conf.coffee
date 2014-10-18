@@ -10,6 +10,7 @@ module.exports = (config) ->
             'karma-junit-reporter'
         ]
         browsers: ['PhantomJS']
+        reporters: ['progress', 'junit']
         junitReporter:
             outputFile: 'reports/unit.xml'
             suite: 'unit'
