@@ -2,7 +2,6 @@
   "name": "scrumtimer",
   "version": "0.1.0",
   "description": "For calculating scrum talk times",
-  "main": "index.js",
   "scripts": {
     "start": "coffee server/server.coffee",
     "postinstall": "bower install",
