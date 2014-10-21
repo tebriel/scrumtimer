@@ -2,6 +2,7 @@
 module.exports = (config) ->
     config.set
         basePath: './'
+        autoWatchBatchDelay: 750
         frameworks: ['jasmine']
         plugins : [
             # 'karma-chrome-launcher'

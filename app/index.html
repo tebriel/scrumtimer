@@ -20,10 +20,7 @@
     <div class="container" ng-controller="timerCtrl">
         <div class="row">
             <div class="col-xs-6">
-                <h3>{{ currentTime|time }}</h3>
-            </div>
-            <div class="col-xs-6">
-                <h3 ng-if="laps.length>0">Total: {{ totalTime|time }}</h3>
+                <h3>Total: {{ totalTime|time }}</h3>
             </div>
         </div>
         <div class="row">
@@ -32,14 +29,14 @@
                 ng-if="!running"
                 ng-click="start()"
                 type="button"
-                class="btn btn-lg btn-success col-xs-5">
+                class="btn btn-lg btn-success col-xs-4">
                 Start
             </button>
             <button
                 ng-if="running"
                 ng-click="stop()"
                 type="button"
-                class="btn btn-lg btn-danger col-xs-5">
+                class="btn btn-lg btn-danger col-xs-4">
                 Stop
             </button>
             <div class="col-xs-2"></div>
@@ -47,26 +44,32 @@
                 ng-if="!running"
                 ng-click="reset()"
                 type="button"
-                class="btn btn-lg btn-danger col-xs-5">
+                class="btn btn-lg btn-danger col-xs-4">
                 Reset
             </button>
             <button
                 ng-if="running"
                 ng-click="lap()"
                 type="button"
-                class="btn btn-lg btn-warning col-xs-5">
-                Lap
+                class="btn btn-lg btn-warning col-xs-4">
+                Next
             </button>
         </div>
 
         <br />
-        <div ng-if="laps.length>1&&!running">
+        <div ng-if="laps.length>0&&!running">
             <h3>Average: {{ average()|time }} </h3>
             <h3>Longest: {{ longest().time|time }}</h3>
             <h3>Shortest: {{ shortest().time|time }}</h3>
         </div>
 
         <ul class='list-group'>
+            <li class="list-group-item"
+                ng-if="running"
+                ng-class="{'list-group-item-danger':isLongest(currentTime),
+                            'list-group-item-success':isShortest(currentTime)}">
+                {{ currentTime|time }}
+            </li>
             <li class="list-group-item"
                 ng-class="{'list-group-item-danger':isLongest(lapItem),
                             'list-group-item-success':isShortest(lapItem)}"

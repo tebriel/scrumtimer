@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "For calculating scrum talk times",
   "scripts": {
-    "start": "coffee server/server.coffee",
     "postinstall": "bower install",
     "test": "karma start --single-run"
   },

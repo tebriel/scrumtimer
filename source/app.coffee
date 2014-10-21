@@ -31,20 +31,32 @@ class TimerCtrl
 
         return
 
+    numberWrap: (lapItem) ->
+        if _.isNumber lapItem
+            return time: lapItem
+        return lapItem
+
     isLongest: (lapItem) =>
+        lapItem = @numberWrap lapItem
         Math.floor(lapItem.time/1000) is Math.floor(@longest().time/1000)
 
     isShortest: (lapItem) =>
+        lapItem = @numberWrap lapItem
         Math.floor(lapItem.time/1000) is Math.floor(@shortest().time/1000)
 
     average: =>
         return @$scope.totalTime / (@$scope.laps.length+1)
 
+    prepLapArray: =>
+        laps = angular.copy(@$scope.laps)
+        laps.push time: @$scope.currentTime
+        return laps
+
     longest: =>
-        return _.max @$scope.laps, (lap) -> lap.time
+        return _.max @prepLapArray(), (lap) -> lap.time
 
     shortest: =>
-        return _.min @$scope.laps, (lap) -> lap.time
+        return _.min @prepLapArray(), (lap) -> lap.time
 
     start: =>
         @startTime = new Date
@@ -70,6 +82,7 @@ class TimerCtrl
         return
 
     stop: =>
+        @lap()
         @$interval.cancel @timerInterval
         @$scope.running = false
         @timerInterval = null
