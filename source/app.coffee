@@ -49,7 +49,8 @@ class TimerCtrl
 
     prepLapArray: =>
         laps = angular.copy(@$scope.laps)
-        laps.push time: @$scope.currentTime
+        if @$scope.running
+            laps.push time: @$scope.currentTime
         return laps
 
     longest: =>

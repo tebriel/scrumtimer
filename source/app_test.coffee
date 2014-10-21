@@ -1,6 +1,6 @@
 describe "App Test", ->
     beforeEach module 'scrumtimer'
-    beforeEach inject (@$controller, @$rootScope) ->
+    beforeEach inject (@$controller, @$rootScope, @$interval) ->
         @$scope = @$rootScope.$new()
         @timerCtrl = @$controller 'timerCtrl', {@$scope}
 
@@ -40,4 +40,9 @@ describe "App Test", ->
         expect(@$scope.isShortest time:10000).toBe true
         expect(@$scope.isShortest 10000).toBe true
 
+    it "Should not add a 0s lap to the list when not running", ->
+        for i in [1..5]
+            @$scope.laps.push time: i * 1000
+
+        expect(@$scope.shortest().time).not.toEqual 0
 
