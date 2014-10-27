@@ -74,7 +74,7 @@
                 ng-if="running"
                 ng-class="{'list-group-item-danger':isLongest(currentTime),
                             'list-group-item-success':isShortest(currentTime)}">
-                {{ currentTime|time }}
+                            <h2>{{ currentTime|time }}</h2>
             </li>
             <li class="list-group-item"
                 ng-class="{'list-group-item-danger':isLongest(lapItem),
