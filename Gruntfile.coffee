@@ -9,12 +9,19 @@ module.exports = (grunt) ->
                 tasks: ['clean', 'coffee']
 
         coffee:
-            compile:
+            scripts:
                 expand: true
                 flatten: true
                 cwd: 'source'
                 src: ['*.coffee']
                 dest: 'app/scripts'
+                ext: '.js'
+            server:
+                expand: true
+                flatten: true
+                cwd: 'api'
+                src: ['*.coffee']
+                dest: 'api/scripts'
                 ext: '.js'
 
         clean:

@@ -4,7 +4,8 @@
   "description": "For calculating scrum talk times",
   "scripts": {
     "postinstall": "bower install",
-    "test": "karma start --single-run"
+    "test": "karma start --single-run",
+    "start": "node api/scripts/server.js"
   },
   "engines": {
     "node": "0.10.x"
